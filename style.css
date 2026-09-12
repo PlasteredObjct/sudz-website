@@ -31,6 +31,14 @@ body {
   padding: 0 24px;
 }
 
+/* Header and utility bar span wider than content sections so they hug
+   the real screen edge on large monitors instead of floating inward */
+.utility-inner,
+.header-inner {
+  max-width: 1800px;
+  padding: 0 40px;
+}
+
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
