@@ -1,5 +1,12 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
+const serviceSelect = document.getElementById('service');
+document.querySelectorAll('.price-card [data-package]').forEach(link => {
+  link.addEventListener('click', () => {
+    serviceSelect.value = link.dataset.package;
+  });
+});
+
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function closeCustomMonthDropdown() {

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="#home" class="logo">
-      <span class="logo-sudz">SUDZ</span>
+      <img src="assets/logo/sudz-wordmark-transparent.png" alt="SUDZ Mobile Detailing" class="logo-img">
     </a>
     <nav class="main-nav" id="mainNav">
       <a href="#services">Services</a>
@@ -92,7 +92,7 @@
     <div class="container">
       <p class="eyebrow center">3 Levels to Choose From</p>
       <h2 class="section-title center">Pick Your Package</h2>
-      <p class="section-sub center">Sample pricing &mdash; template only, final rates coming soon.</p>
+      <p class="section-sub center">Straightforward pricing for every level of clean.</p>
 
       <div class="pricing-grid">
 
@@ -105,7 +105,7 @@
             <li>Quick wipe-down</li>
             <li>Quick interior vacuum</li>
           </ul>
-          <a href="#booking" class="btn btn-outline btn-block">Book This</a>
+          <a href="#booking" class="btn btn-outline btn-block" data-package="Express">Book This</a>
         </div>
 
         <div class="price-card featured">
@@ -118,7 +118,7 @@
             <li>Interior surfaces scrubbed</li>
             <li>Full vacuum</li>
           </ul>
-          <a href="#booking" class="btn btn-primary btn-block">Book This</a>
+          <a href="#booking" class="btn btn-primary btn-block" data-package="Refresh">Book This</a>
         </div>
 
         <div class="price-card">
@@ -130,7 +130,7 @@
             <li>Iron decontamination</li>
             <li>Wax/sealant exterior</li>
           </ul>
-          <a href="#booking" class="btn btn-outline btn-block">Book This</a>
+          <a href="#booking" class="btn btn-outline btn-block" data-package="Restore">Book This</a>
         </div>
 
       </div>
@@ -303,12 +303,12 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <span class="logo-sudz small">SUDZ</span>
+    <img src="assets/logo/sudz-wordmark-transparent.png" alt="SUDZ Mobile Detailing" class="logo-img small">
     <p>&copy; <span id="year"></span> SUDZ Mobile Detailing. All rights reserved.</p>
   </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>
