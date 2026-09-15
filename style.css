@@ -582,6 +582,7 @@ body.modal-open { overflow: hidden; }
 .flatpickr-months .flatpickr-month { background: transparent; color: var(--white); fill: var(--white); }
 .flatpickr-current-month { position: relative; }
 .flatpickr-current-month input.cur-year { color: var(--white); font-weight: 600; }
+.flatpickr-current-month .numInputWrapper span { opacity: 1; }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after { border-bottom-color: var(--white) !important; }
 .flatpickr-current-month .numInputWrapper span.arrowDown:after { border-top-color: var(--white) !important; }
 .flatpickr-current-month .numInputWrapper span:hover { background: rgba(255,255,255,0.15); }
