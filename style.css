@@ -533,14 +533,14 @@ body.modal-open { overflow: hidden; }
 }
 .ba-after span { color: var(--teal); }
 
-/* Booking */
-.booking-inner {
+/* Quote */
+.quote-inner {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 60px;
   align-items: start;
 }
-.booking-form {
+.quote-form {
   background: var(--black-soft);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
@@ -829,7 +829,7 @@ span.flatpickr-weekday {
   .pricing-grid { grid-template-columns: 1fr; }
   .price-card.featured { transform: none; }
   .ba-groups { grid-template-columns: 1fr; gap: 24px; }
-  .booking-inner { grid-template-columns: 1fr; }
+  .quote-inner { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonial-grid { grid-template-columns: 1fr; }
   .about-badges { grid-template-columns: 1fr 1fr; }

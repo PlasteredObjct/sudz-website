@@ -156,11 +156,11 @@ mainNav.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => mainNav.classList.remove('open'));
 });
 
-const bookingForm = document.getElementById('bookingForm');
+const quoteForm = document.getElementById('quoteForm');
 const formNote = document.getElementById('formNote');
-bookingForm.addEventListener('submit', (e) => {
+quoteForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  formNote.textContent = "This is a rough-draft form — not yet connected to a real booking system. Your info was not sent anywhere.";
+  formNote.textContent = "This is a rough-draft form — not yet connected to a real quote/booking system. Your info was not sent anywhere.";
 });
 
 // Cascading vehicle Make -> Model select, modeled on CARFAX's car search filter

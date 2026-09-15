@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="style.css?v=14">
 </head>
 <body>
 
@@ -31,7 +31,7 @@
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 3c.3 1.9 1.6 3.4 3.5 3.7v2.6c-1.3 0-2.5-.4-3.5-1.1v6.3c0 3-2.4 5.5-5.5 5.5S5.5 17.5 5.5 14.5 7.9 9 11 9c.3 0 .6 0 .9.1v2.7c-.3-.1-.6-.2-.9-.2-1.6 0-2.9 1.3-2.9 2.9s1.3 2.9 2.9 2.9 2.9-1.3 2.9-2.9V3h2.6Z" fill="currentColor"/></svg>
       </a>
     </div>
-    <a href="#booking" class="utility-item utility-cta">Book Now</a>
+    <a href="#quote" class="utility-item utility-cta">Get a Quote</a>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
       <a href="#about">About</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
-      <a href="#booking">Book Now</a>
+      <a href="#quote">Get a Quote</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -74,7 +74,7 @@
         <p class="hero-sub">Professional vehicle cleaning at it's finest, inside and out.</p>
 
         <div class="hero-cta">
-          <a href="#booking" class="btn btn-primary">Book Now</a>
+          <a href="#quote" class="btn btn-primary">Get a Quote</a>
           <a href="#services" class="hero-link">See Pricing &rarr;</a>
         </div>
       </div>
@@ -115,7 +115,7 @@
             <li>Quick interior vacuum</li>
           </ul>
           <button type="button" class="price-card-details" data-detail-trigger="express">View Full Details &rarr;</button>
-          <a href="#booking" class="btn btn-outline btn-block" data-package="Express Wash">Book This</a>
+          <a href="#quote" class="btn btn-outline btn-block" data-package="Express Wash">Get a Quote</a>
         </div>
 
         <div class="price-card featured" data-detail="refresh">
@@ -129,7 +129,7 @@
             <li>Full vacuum</li>
           </ul>
           <button type="button" class="price-card-details" data-detail-trigger="refresh">View Full Details &rarr;</button>
-          <a href="#booking" class="btn btn-primary btn-block" data-package="Refresh Package">Book This</a>
+          <a href="#quote" class="btn btn-primary btn-block" data-package="Refresh Package">Get a Quote</a>
         </div>
 
         <div class="price-card" data-detail="restore">
@@ -142,7 +142,7 @@
             <li>Wax/sealant exterior</li>
           </ul>
           <button type="button" class="price-card-details" data-detail-trigger="restore">View Full Details &rarr;</button>
-          <a href="#booking" class="btn btn-outline btn-block" data-package="Restore Package">Book This</a>
+          <a href="#quote" class="btn btn-outline btn-block" data-package="Restore Package">Get a Quote</a>
         </div>
 
       </div>
@@ -350,14 +350,14 @@
     </div>
   </section>
 
-  <section id="booking" class="section">
-    <div class="container booking-inner">
-      <div class="booking-copy">
-        <p class="eyebrow">Book Now</p>
-        <h2 class="section-title">Request an Appointment</h2>
-        <p class="section-sub">Fill out the form and we'll confirm your time slot. This form is a placeholder for the rough draft &mdash; it needs to be connected to a booking service or email backend before going live.</p>
+  <section id="quote" class="section">
+    <div class="container quote-inner">
+      <div class="quote-copy">
+        <p class="eyebrow">Get a Quote</p>
+        <h2 class="section-title">Get Your Free Quote</h2>
+        <p class="section-sub">Tell us about your vehicle and we'll text or call you back with a price. This form is a placeholder for the rough draft &mdash; it needs to be connected to an email/database backend before going live.</p>
       </div>
-      <form class="booking-form" id="bookingForm">
+      <form class="quote-form" id="quoteForm">
         <div class="form-row">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" placeholder="Jane Smith" required>
@@ -414,7 +414,7 @@
           <label for="location">Service Location</label>
           <input type="text" id="location" name="location" placeholder="Address where you'd like us to meet you" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Request Booking</button>
+        <button type="submit" class="btn btn-primary btn-block">Get My Quote</button>
         <p class="form-note" id="formNote"></p>
       </form>
     </div>
@@ -468,6 +468,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-<script src="script.js?v=5"></script>
+<script src="script.js?v=6"></script>
 </body>
 </html>
