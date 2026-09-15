@@ -553,6 +553,7 @@ body.modal-open { overflow: hidden; }
 .form-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .form-row-split > div { display: flex; flex-direction: column; gap: 6px; }
 .form-row label { font-size: 0.85rem; font-weight: 600; color: var(--gray); }
+.label-optional { font-weight: 400; text-transform: none; letter-spacing: normal; }
 .form-row input, .form-row select, .form-row textarea {
   background: var(--black);
   border: 1px solid rgba(255,255,255,0.12);
