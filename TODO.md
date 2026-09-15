@@ -26,6 +26,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [ ] Rename packages to match Silas's naming — Express → Express Wash, Refresh → Refresh Package, Restore → Restore Package
 - [ ] Add a fleet service section — currently only mentioned in About/FAQ, has no section of its own
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
+- [ ] Optimize the page for mobile format — noted 2026-09-15, not scoped yet
 
 ## Open Decisions
 
