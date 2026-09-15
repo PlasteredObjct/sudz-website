@@ -580,7 +580,13 @@ body.modal-open { overflow: hidden; }
 .flatpickr-calendar.arrowTop:before { border-bottom-color: rgba(255,255,255,0.1); }
 .flatpickr-calendar.arrowTop:after { border-bottom-color: var(--black-soft); }
 .flatpickr-months .flatpickr-month { background: transparent; color: var(--white); fill: var(--white); }
-.flatpickr-current-month { position: relative; }
+.flatpickr-current-month {
+  position: relative;
+  left: 0;
+  width: 100%;
+  padding: 7.48px 34px 0;
+  box-sizing: border-box;
+}
 .flatpickr-current-month input.cur-year { color: var(--white); font-weight: 600; }
 .flatpickr-current-month .numInputWrapper span { opacity: 1; }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after { border-bottom-color: var(--white) !important; }
