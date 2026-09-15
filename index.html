@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 
@@ -55,6 +55,13 @@
   </div>
 </header>
 
+<div class="service-area-banner">
+  <div class="container service-area-inner">
+    <span class="service-area-pin" aria-hidden="true">&#128205;</span>
+    <p>Now serving <strong>Danville</strong>, <strong>Chatham</strong>, <strong>Ringgold</strong>, <strong>Blairs</strong> &amp; <strong>Gretna</strong>, VA</p>
+  </div>
+</div>
+
 <main>
 
   <section id="home" class="hero">
@@ -98,7 +105,7 @@
 
       <div class="pricing-grid">
 
-        <div class="price-card">
+        <div class="price-card" data-detail="express">
           <h3>Express</h3>
           <p class="price">$89<span>starting</span></p>
           <ul>
@@ -107,10 +114,11 @@
             <li>Quick wipe-down</li>
             <li>Quick interior vacuum</li>
           </ul>
+          <button type="button" class="price-card-details" data-detail-trigger="express">View Full Details &rarr;</button>
           <a href="#booking" class="btn btn-outline btn-block" data-package="Express">Book This</a>
         </div>
 
-        <div class="price-card featured">
+        <div class="price-card featured" data-detail="refresh">
           <p class="badge">Most Popular</p>
           <h3>Refresh</h3>
           <p class="price">$139<span>starting</span></p>
@@ -120,10 +128,11 @@
             <li>Interior surfaces scrubbed</li>
             <li>Full vacuum</li>
           </ul>
+          <button type="button" class="price-card-details" data-detail-trigger="refresh">View Full Details &rarr;</button>
           <a href="#booking" class="btn btn-primary btn-block" data-package="Refresh">Book This</a>
         </div>
 
-        <div class="price-card">
+        <div class="price-card" data-detail="restore">
           <h3>Restore</h3>
           <p class="price">$219<span>starting</span></p>
           <ul>
@@ -132,6 +141,7 @@
             <li>Iron decontamination</li>
             <li>Wax/sealant exterior</li>
           </ul>
+          <button type="button" class="price-card-details" data-detail-trigger="restore">View Full Details &rarr;</button>
           <a href="#booking" class="btn btn-outline btn-block" data-package="Restore">Book This</a>
         </div>
 
@@ -440,7 +450,24 @@
   </div>
 </footer>
 
+<div class="package-modal-overlay" id="packageModalOverlay" hidden>
+  <div class="package-modal" role="dialog" aria-modal="true" aria-labelledby="packageModalTitle">
+    <button type="button" class="package-modal-close" id="packageModalClose" aria-label="Close">&times;</button>
+    <p class="package-modal-eyebrow">Package Details</p>
+    <h3 class="package-modal-title" id="packageModalTitle"></h3>
+    <p class="package-modal-price" id="packageModalPrice"></p>
+    <div class="package-modal-section">
+      <p class="package-modal-heading">What's Included</p>
+      <ul class="package-modal-list" id="packageModalIncludes"></ul>
+    </div>
+    <div class="package-modal-section">
+      <p class="package-modal-heading">Full Description</p>
+      <p class="package-modal-description" id="packageModalDescription"></p>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>

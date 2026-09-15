@@ -16,6 +16,69 @@ document.querySelectorAll('.price-card [data-package]').forEach(link => {
   });
 });
 
+// Package detail modal — description text is a placeholder template until
+// Silas provides the real per-package write-up (see TODO.md).
+const packageDetails = {
+  express: {
+    name: 'Express',
+    price: '$89 starting',
+    includes: ['Exterior wash', 'Tires & wheels cleaned', 'Quick wipe-down', 'Quick interior vacuum'],
+    description: '[Placeholder] Full description of the Express package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
+  },
+  refresh: {
+    name: 'Refresh',
+    price: '$139 starting',
+    includes: ['Everything in Express', 'Steam-cleaned interior', 'Interior surfaces scrubbed', 'Full vacuum'],
+    description: '[Placeholder] Full description of the Refresh package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
+  },
+  restore: {
+    name: 'Restore',
+    price: '$219 starting',
+    includes: ['Everything in Refresh', 'Carpet shampooing', 'Iron decontamination', 'Wax/sealant exterior'],
+    description: '[Placeholder] Full description of the Restore package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
+  }
+};
+
+const packageModalOverlay = document.getElementById('packageModalOverlay');
+const packageModalClose = document.getElementById('packageModalClose');
+const packageModalTitle = document.getElementById('packageModalTitle');
+const packageModalPrice = document.getElementById('packageModalPrice');
+const packageModalIncludes = document.getElementById('packageModalIncludes');
+const packageModalDescription = document.getElementById('packageModalDescription');
+
+function openPackageModal(key) {
+  const data = packageDetails[key];
+  if (!data) return;
+  packageModalTitle.textContent = data.name;
+  packageModalPrice.textContent = data.price;
+  packageModalIncludes.innerHTML = data.includes.map(item => `<li>${item}</li>`).join('');
+  packageModalDescription.textContent = data.description;
+  packageModalOverlay.hidden = false;
+  document.body.classList.add('modal-open');
+}
+
+function closePackageModal() {
+  packageModalOverlay.hidden = true;
+  document.body.classList.remove('modal-open');
+}
+
+document.querySelectorAll('.price-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    openPackageModal(card.dataset.detail);
+  });
+});
+document.querySelectorAll('[data-detail-trigger]').forEach(btn => {
+  btn.addEventListener('click', () => openPackageModal(btn.dataset.detailTrigger));
+});
+packageModalClose.addEventListener('click', closePackageModal);
+packageModalOverlay.addEventListener('click', (e) => {
+  if (e.target === packageModalOverlay) closePackageModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !packageModalOverlay.hidden) closePackageModal();
+});
+
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function closeCustomMonthDropdown() {

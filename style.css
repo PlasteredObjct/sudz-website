@@ -17,6 +17,17 @@
 
 html { scroll-behavior: smooth; }
 
+/* Scrollbar */
+html { scrollbar-color: var(--teal-dark) var(--black-soft); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--black-soft); }
+::-webkit-scrollbar-thumb {
+  background: var(--teal-dark);
+  border-radius: 999px;
+  border: 2px solid var(--black-soft);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--pink); }
+
 body {
   background: var(--black);
   color: var(--white);
@@ -193,6 +204,25 @@ ul { list-style: none; }
 .utility-cta { color: var(--pink); }
 .utility-cta:hover { color: var(--white); }
 
+/* Service area banner */
+.service-area-banner {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(23,201,196,0.12), rgba(236,35,130,0.12));
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.service-area-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.service-area-pin { font-size: 1rem; }
+.service-area-inner strong { color: var(--teal); }
+
 /* Hero */
 .hero {
   position: relative;
@@ -351,6 +381,122 @@ ul { list-style: none; }
   padding: 6px 16px;
   border-radius: 999px;
 }
+.price-card { cursor: pointer; transition: border-color 0.2s; }
+.price-card:hover { border-color: var(--teal); }
+.price-card.featured:hover { border-color: var(--pink); }
+.price-card-details {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--gray);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.price-card-details:hover { color: var(--teal); border-color: var(--teal); }
+
+/* Package detail modal */
+.package-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.package-modal {
+  position: relative;
+  background: var(--black-soft);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 40px 36px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+}
+.package-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: var(--white);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+.package-modal-close:hover { border-color: var(--pink); color: var(--pink); }
+.package-modal-eyebrow {
+  font-family: var(--font-display);
+  font-weight: normal;
+  color: var(--teal);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.package-modal-title {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+.package-modal-price {
+  color: var(--teal);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.package-modal-section {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 18px;
+  margin-top: 18px;
+}
+.package-modal-section:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+.package-modal-heading {
+  font-family: var(--font-display);
+  font-weight: normal;
+  color: var(--pink);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.package-modal-list { display: flex; flex-direction: column; gap: 8px; }
+.package-modal-list li {
+  font-size: 0.92rem;
+  padding-left: 22px;
+  position: relative;
+}
+.package-modal-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 7px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.package-modal-description {
+  color: var(--gray);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  font-style: italic;
+}
+body.modal-open { overflow: hidden; }
 
 /* Gallery */
 .ba-groups {
@@ -705,4 +851,6 @@ span.flatpickr-weekday {
   .hero { padding: 60px 0; }
   .utility-follow { display: none; }
   .utility-inner { gap: 20px; }
+  .package-modal { padding: 32px 22px; }
+  .service-area-inner { font-size: 0.82rem; padding: 10px 16px; }
 }
