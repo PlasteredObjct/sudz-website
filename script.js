@@ -9,11 +9,8 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-const serviceSelect = document.getElementById('service');
-document.querySelectorAll('.price-card [data-package]').forEach(link => {
-  link.addEventListener('click', () => {
-    serviceSelect.value = link.dataset.package;
-  });
+document.querySelectorAll('.btn-pending-fsm').forEach(btn => {
+  btn.addEventListener('click', (e) => e.preventDefault());
 });
 
 // Package detail modal — description text is a placeholder template until
