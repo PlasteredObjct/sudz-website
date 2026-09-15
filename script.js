@@ -20,22 +20,22 @@ document.querySelectorAll('.price-card [data-package]').forEach(link => {
 // Silas provides the real per-package write-up (see TODO.md).
 const packageDetails = {
   express: {
-    name: 'Express',
+    name: 'Express Wash',
     price: '$89 starting',
     includes: ['Exterior wash', 'Tires & wheels cleaned', 'Quick wipe-down', 'Quick interior vacuum'],
-    description: '[Placeholder] Full description of the Express package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
+    description: '[Placeholder] Full description of Express Wash goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
   },
   refresh: {
-    name: 'Refresh',
+    name: 'Refresh Package',
     price: '$139 starting',
-    includes: ['Everything in Express', 'Steam-cleaned interior', 'Interior surfaces scrubbed', 'Full vacuum'],
-    description: '[Placeholder] Full description of the Refresh package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
+    includes: ['Everything in Express Wash', 'Steam-cleaned interior', 'Interior surfaces scrubbed', 'Full vacuum'],
+    description: '[Placeholder] Full description of the Refresh Package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
   },
   restore: {
-    name: 'Restore',
+    name: 'Restore Package',
     price: '$219 starting',
-    includes: ['Everything in Refresh', 'Carpet shampooing', 'Iron decontamination', 'Wax/sealant exterior'],
-    description: '[Placeholder] Full description of the Restore package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
+    includes: ['Everything in Refresh Package', 'Carpet shampooing', 'Iron decontamination', 'Wax/sealant exterior'],
+    description: '[Placeholder] Full description of the Restore Package goes here — what it covers, roughly how long it takes on site, and how pricing adjusts by vehicle size. Replace this text once the real write-up is ready.'
   }
 };
 
