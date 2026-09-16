@@ -157,6 +157,20 @@ const quoteForm = document.getElementById('quoteForm');
 const formNote = document.getElementById('formNote');
 const quoteSubmitBtn = quoteForm.querySelector('button[type="submit"]');
 
+const phoneInput = document.getElementById('phone');
+phoneInput.addEventListener('input', () => {
+  const digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  if (digits.length > 6) {
+    phoneInput.value = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  } else if (digits.length > 3) {
+    phoneInput.value = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  } else if (digits.length > 0) {
+    phoneInput.value = `(${digits}`;
+  } else {
+    phoneInput.value = '';
+  }
+});
+
 quoteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
