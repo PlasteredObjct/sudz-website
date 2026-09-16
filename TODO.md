@@ -24,7 +24,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] Point "Book Now" (utility bar + 3 pricing card buttons) to an external booking site instead of the on-page form — *partially done 2026-09-15: those 4 CTAs reverted to "Book Now" text (distinct from the "Get a Quote" form CTAs) and wired as inert placeholders (`.btn-pending-fsm` class, click does nothing, `href="#"`) until an FSM is chosen. Swap in the real booking URL once decided.*
 - [ ] Wire up a backend for the Get a Quote form (email and/or database)
 - [x] Rename packages to match Silas's naming — *done 2026-09-15, cards, booking form dropdown, and package modal all updated: Express Wash, Refresh Package, Restore Package*
-- [ ] Add a fleet service section — currently only mentioned in About/FAQ, has no section of its own
+- [x] ~~Add a fleet service section~~ — *scrapped 2026-09-16, decided against a dedicated section. Fleet is still mentioned in About/FAQ, and "Fleet Service" is selectable in the Get a Quote form's Service dropdown.*
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
 - [ ] Optimize the page for mobile format — noted 2026-09-15, not scoped yet
 
@@ -41,7 +41,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 ## Project notes
 
 - Code: `C:\Users\Matth\Desktop\SUDZ-website` → [github.com/PlasteredObjct/sudz-website](https://github.com/PlasteredObjct/sudz-website) (`main`)
-- Pushed through commit `57bcd3c`. Nothing uncommitted.
+- Pushed through commit `518e52a`. Nothing uncommitted.
 - Local dev server: `preview_start` name `sudz-site`, port 5173. Docker: `docker build -t sudz-website . && docker run -d -p 8080:80 sudz-website`
 - Bump the `?v=N` query on `style.css` / `script.js` in `index.html` after editing them, or browsers serve stale cached copies.
 - The Dockerfile must `COPY assets/` explicitly — otherwise the logo breaks in the container.
