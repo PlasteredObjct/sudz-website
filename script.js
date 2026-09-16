@@ -155,9 +155,37 @@ mainNav.querySelectorAll('a').forEach(link => {
 
 const quoteForm = document.getElementById('quoteForm');
 const formNote = document.getElementById('formNote');
-quoteForm.addEventListener('submit', (e) => {
+const quoteSubmitBtn = quoteForm.querySelector('button[type="submit"]');
+
+quoteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  formNote.textContent = "This is a rough-draft form — not yet connected to a real quote/booking system. Your info was not sent anywhere.";
+
+  const payload = Object.fromEntries(new FormData(quoteForm));
+
+  quoteSubmitBtn.disabled = true;
+  formNote.classList.remove('form-note-error');
+  formNote.textContent = 'Sending...';
+
+  try {
+    const res = await fetch('/api/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || 'Request failed');
+    }
+
+    formNote.textContent = "Thanks! We got your request and will text or call you back shortly.";
+    quoteForm.reset();
+  } catch (err) {
+    formNote.classList.add('form-note-error');
+    formNote.textContent = "Something went wrong sending that. Please call or text us at 434-489-1525 instead.";
+  } finally {
+    quoteSubmitBtn.disabled = false;
+  }
 });
 
 // Cascading vehicle Make -> Model select, modeled on CARFAX's car search filter

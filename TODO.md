@@ -22,7 +22,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] Make service locations more visible — *added 2026-09-15, a "Now Serving..." banner sits right under the header, visible without scrolling. Original Service Area box in Contact section at the bottom kept as-is.*
 - [x] Convert "Book Now" section into a "Get a Quote" section — *done 2026-09-15, section renamed to `#quote` (eyebrow, title, subtitle, submit button); nav link + hero button relabeled "Get a Quote" and point to the on-page form. Form field set unchanged — see Open Decisions below.*
 - [x] Point "Book Now" (utility bar + 3 pricing card buttons) to an external booking site instead of the on-page form — *partially done 2026-09-15: those 4 CTAs reverted to "Book Now" text (distinct from the "Get a Quote" form CTAs) and wired as inert placeholders (`.btn-pending-fsm` class, click does nothing, `href="#"`) until an FSM is chosen. Swap in the real booking URL once decided.*
-- [ ] Wire up a backend for the Get a Quote form (email and/or database)
+- [x] Wire up a backend for the Get a Quote form (email and/or database) — *scaffolded 2026-09-16: `server/` is a small Express + Nodemailer service that emails submissions via Gmail SMTP, reverse-proxied through nginx at `/api/quote` (see `docker-compose.yml`, `nginx.conf`). Needs a real Gmail App Password in `server/.env` (gitignored, see `server/.env.example`) before it can actually send — not yet tested end-to-end with a real send.*
 - [x] Rename packages to match Silas's naming — *done 2026-09-15, cards, booking form dropdown, and package modal all updated: Express Wash, Refresh Package, Restore Package*
 - [x] ~~Add a fleet service section~~ — *scrapped 2026-09-16, decided against a dedicated section. Fleet is still mentioned in About/FAQ, and "Fleet Service" is selectable in the Get a Quote form's Service dropdown.*
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
@@ -34,7 +34,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [ ] Which external site should "Book Now" redirect to? (Jobber, Square Appointments, Calendly, etc.) — buttons are wired and waiting, just need the URL
 - [ ] What should the Get a Quote form actually collect vs. the old booking form?
 - [ ] Confirm About/FAQ copy with partner — real copy is committed and live, pending sign-off
-- [ ] Backend approach — custom server in Docker vs. third-party form service (Formspree, etc.)
+- [x] Backend approach — *decided 2026-09-16: custom Express relay in its own Docker service (`server/`), sends via Gmail SMTP rather than a raw mail server.*
 
 ---
 
@@ -42,6 +42,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 
 - Code: `C:\Users\Matth\Desktop\SUDZ-website` → [github.com/PlasteredObjct/sudz-website](https://github.com/PlasteredObjct/sudz-website) (`main`)
 - Pushed through commit `518e52a`. Nothing uncommitted.
-- Local dev server: `preview_start` name `sudz-site`, port 5173. Docker: `docker build -t sudz-website . && docker run -d -p 8080:80 sudz-website`
+- Local dev server: `preview_start` name `sudz-site`, port 5173 (static only — the `/api/quote` backend isn't reachable through this, so quote-form submissions will show the fallback error message here by design).
+- Full stack (static site + quote backend, for testing real email sends): `preview_start` name `sudz-fullstack`, or `docker compose up --build`, at port 8080. Requires `server/.env` populated (copy from `server/.env.example`, needs a real Gmail App Password) or the backend container will fail to send mail.
 - Bump the `?v=N` query on `style.css` / `script.js` in `index.html` after editing them, or browsers serve stale cached copies.
 - The Dockerfile must `COPY assets/` explicitly — otherwise the logo breaks in the container.
