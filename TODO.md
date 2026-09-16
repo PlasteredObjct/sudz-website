@@ -30,7 +30,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 
 ## Open Decisions
 
-- [ ] **Pricing conflict** — cards show fixed $89/$139/$219, but Silas's FAQ says base rates start at $80 and vary by size/condition, confirmed before work begins. The site currently tells two different stories. *Biggest blocker to launch.*
+- [x] **Pricing conflict** — *fixed 2026-09-16: FAQ's "base rates start at $80" corrected to $89 to match the Express Wash card. Both now say pricing starts there and varies by size/condition.*
 - [ ] Which external site should "Book Now" redirect to? (Jobber, Square Appointments, Calendly, etc.) — buttons are wired and waiting, just need the URL
 - [ ] What should the Get a Quote form actually collect vs. the old booking form?
 - [ ] Confirm About/FAQ copy with partner — real copy is committed and live, pending sign-off
@@ -41,7 +41,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 ## Project notes
 
 - Code: `C:\Users\Matth\Desktop\SUDZ-website` → [github.com/PlasteredObjct/sudz-website](https://github.com/PlasteredObjct/sudz-website) (`main`)
-- Pushed through commit `18274d6`. **Not yet pushed:** Get a Quote conversion, Book Now/FSM placeholder buttons, and this TODO update (local commit `da4bb33` and later).
+- Pushed through commit `57bcd3c`. Nothing uncommitted.
 - Local dev server: `preview_start` name `sudz-site`, port 5173. Docker: `docker build -t sudz-website . && docker run -d -p 8080:80 sudz-website`
 - Bump the `?v=N` query on `style.css` / `script.js` in `index.html` after editing them, or browsers serve stale cached copies.
 - The Dockerfile must `COPY assets/` explicitly — otherwise the logo breaks in the container.
