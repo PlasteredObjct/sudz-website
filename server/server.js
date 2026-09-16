@@ -5,6 +5,9 @@ const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
+// Sits behind the nginx reverse proxy (see nginx.conf) — trust its
+// X-Forwarded-For so express-rate-limit keys on the real client IP.
+app.set('trust proxy', 1);
 app.use(cors());
 app.use(express.json());
 
