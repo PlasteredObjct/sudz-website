@@ -22,7 +22,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] Make service locations more visible — *added 2026-09-15, a "Now Serving..." banner sits right under the header, visible without scrolling. Original Service Area box in Contact section at the bottom kept as-is.*
 - [x] Convert "Book Now" section into a "Get a Quote" section — *done 2026-09-15, section renamed to `#quote` (eyebrow, title, subtitle, submit button); nav link + hero button relabeled "Get a Quote" and point to the on-page form. Form field set unchanged — see Open Decisions below.*
 - [x] Point "Book Now" (utility bar + 3 pricing card buttons) to an external booking site instead of the on-page form — *partially done 2026-09-15: those 4 CTAs reverted to "Book Now" text (distinct from the "Get a Quote" form CTAs) and wired as inert placeholders (`.btn-pending-fsm` class, click does nothing, `href="#"`) until an FSM is chosen. Swap in the real booking URL once decided.*
-- [x] Wire up a backend for the Get a Quote form (email and/or database) — *scaffolded 2026-09-16: `server/` is a small Express + Nodemailer service that emails submissions via Gmail SMTP, reverse-proxied through nginx at `/api/quote` (see `docker-compose.yml`, `nginx.conf`). Needs a real Gmail App Password in `server/.env` (gitignored, see `server/.env.example`) before it can actually send — not yet tested end-to-end with a real send.*
+- [x] Wire up a backend for the Get a Quote form (email and/or database) — *done and verified 2026-09-16: `server/` is a small Express + Nodemailer service that emails submissions to sudzmobiledetailing8@gmail.com via Gmail SMTP, reverse-proxied through nginx at `/api/quote` (see `docker-compose.yml`, `nginx.conf`). Real Gmail App Password is in `server/.env` (gitignored). Confirmed working with a live browser submission and a real send.*
 - [x] Rename packages to match Silas's naming — *done 2026-09-15, cards, booking form dropdown, and package modal all updated: Express Wash, Refresh Package, Restore Package*
 - [x] ~~Add a fleet service section~~ — *scrapped 2026-09-16, decided against a dedicated section. Fleet is still mentioned in About/FAQ, and "Fleet Service" is selectable in the Get a Quote form's Service dropdown.*
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
@@ -41,7 +41,8 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 ## Project notes
 
 - Code: `C:\Users\Matth\Desktop\SUDZ-website` → [github.com/PlasteredObjct/sudz-website](https://github.com/PlasteredObjct/sudz-website) (`main`)
-- Pushed through commit `518e52a`. Nothing uncommitted.
+- Pushed through commit `a8e5300`. Nothing uncommitted.
+- `server/.env` (gitignored, local only) has the real Gmail App Password for `sudzmobiledetailing8@gmail.com` — never commit this file. Regenerate/revoke the App Password from the Gmail account's Security settings if it's ever compromised.
 - Local dev server: `preview_start` name `sudz-site`, port 5173 (static only — the `/api/quote` backend isn't reachable through this, so quote-form submissions will show the fallback error message here by design).
 - Full stack (static site + quote backend, for testing real email sends): `preview_start` name `sudz-fullstack`, or `docker compose up --build`, at port 8080. Requires `server/.env` populated (copy from `server/.env.example`, needs a real Gmail App Password) or the backend container will fail to send mail.
 - Bump the `?v=N` query on `style.css` / `script.js` in `index.html` after editing them, or browsers serve stale cached copies.
