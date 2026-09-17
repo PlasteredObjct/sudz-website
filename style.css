@@ -849,12 +849,6 @@ span.flatpickr-weekday {
   padding: 24px;
   text-align: center;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.contact-grid .contact-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--pink);
-  box-shadow: 0 16px 32px rgba(236,35,130,0.16);
 }
 .contact-card-icon {
   width: 32px;
@@ -894,6 +888,14 @@ span.flatpickr-weekday {
   .ba-groups { grid-template-columns: 1fr; gap: 24px; }
   .quote-inner { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Phone and Email cards are actionable (tel:/mailto:) on touch
+     breakpoints — make the whole card tappable, not just the link text. */
+  .contact-card:nth-child(1),
+  .contact-card:nth-child(2) { position: relative; }
+  .contact-card:nth-child(1) p a,
+  .contact-card:nth-child(2) p a { display: block; }
+  .contact-card:nth-child(1) p a::after,
+  .contact-card:nth-child(2) p a::after { content: ""; position: absolute; inset: 0; }
   .testimonial-grid { grid-template-columns: 1fr; }
   .about-badges { grid-template-columns: 1fr 1fr; }
   .hero-inner { grid-template-columns: 1fr; text-align: center; }
