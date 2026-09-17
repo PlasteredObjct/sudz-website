@@ -35,7 +35,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] **Pricing conflict** — *fixed 2026-09-16: FAQ's "base rates start at $80" corrected to $89 to match the Express Wash card. Both now say pricing starts there and varies by size/condition.*
 - [x] Which external site should "Book Now" redirect to? — *decided and wired 2026-09-17: Jobber (see Build Next above).*
 - [x] What should the Get a Quote form actually collect vs. the old booking form? — *simplified 2026-09-17: replaced the cascading Vehicle Make/Model selects (+ "Other" specify fields) with one free-text "Vehicle Year, Make & Model" input. Form is down to 7 fields: Name, Phone, Email, Service, Preferred Date (optional), Vehicle, Location.*
-- [ ] Confirm About/FAQ copy with partner — real copy is committed and live, pending sign-off
+- [x] Confirm About/FAQ copy with partner — *signed off 2026-09-17, real copy stays as-is.*
 - [x] Backend approach — *decided 2026-09-16: custom Express relay in its own Docker service (`server/`), sends via Gmail SMTP rather than a raw mail server.*
 
 ## Deployment
