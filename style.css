@@ -223,8 +223,6 @@ ul { list-style: none; }
 .social-icon { color: var(--gray); display: flex; transition: color 0.2s; }
 .social-icon svg { width: 16px; height: 16px; }
 .social-icon:hover { color: var(--teal); }
-.utility-cta { color: var(--pink); }
-.utility-cta:hover { color: var(--white); }
 
 /* Service area banner */
 .service-area-banner {
@@ -894,10 +892,6 @@ span.flatpickr-weekday {
 
 /* Responsive */
 @media (max-width: 860px) {
-  /* Utility bar's Get a Quote link is redundant with the header nav and
-     hero CTA on touch breakpoints — drop it; the bar's own
-     justify-content: center then centers the remaining phone/social row. */
-  .utility-cta { display: none; }
   .pricing-grid { grid-template-columns: 1fr; }
   .price-card.featured { transform: none; }
   .ba-groups { grid-template-columns: 1fr; gap: 24px; }
