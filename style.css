@@ -208,8 +208,9 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
-  height: 40px;
+  gap: 8px 28px;
+  min-height: 40px;
+  padding: 8px 0;
   flex-wrap: wrap;
 }
 .utility-item { white-space: nowrap; }
@@ -957,7 +958,7 @@ span.flatpickr-weekday {
   .contact-card:nth-child(3) { grid-area: area; }
   .hero { padding: 60px 0; }
   .utility-follow { display: none; }
-  .utility-inner { gap: 20px; }
+  .utility-inner { gap: 8px 20px; }
   .package-modal { padding: 32px 22px; }
   .service-area-inner { font-size: 0.82rem; padding: 10px 16px; }
 }
