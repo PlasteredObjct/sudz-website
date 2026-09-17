@@ -29,7 +29,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const REQUIRED_FIELDS = ['name', 'phone', 'email', 'location'];
+const REQUIRED_FIELDS = ['name', 'phone', 'email', 'vehicle', 'location'];
 
 app.post('/api/quote', quoteLimiter, async (req, res) => {
   const body = req.body || {};
@@ -44,16 +44,13 @@ app.post('/api/quote', quoteLimiter, async (req, res) => {
     return res.status(400).json({ ok: false, error: `Missing required field(s): ${missing.join(', ')}` });
   }
 
-  const make = body.vehicleMake === 'Other' ? body.vehicleMakeOther : body.vehicleMake;
-  const model = body.vehicleModel === 'Other' ? body.vehicleModelOther : body.vehicleModel;
-
   const lines = [
     `Name: ${body.name}`,
     `Phone: ${body.phone}`,
     `Email: ${body.email}`,
     `Service: ${body.service || 'Not specified'}`,
     `Preferred Date: ${body.date || 'Not specified'}`,
-    `Vehicle: ${[make, model].filter(Boolean).join(' ') || 'Not specified'}`,
+    `Vehicle: ${body.vehicle}`,
     `Service Location: ${body.location}`
   ];
 
