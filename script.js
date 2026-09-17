@@ -1,13 +1,45 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Scroll-reveal animations — fade/slide elements in as they enter the viewport
+// Scroll-reveal animations — fade/slide elements in as they enter the viewport.
+// Track scroll speed so fast scrolling shortens the reveal transition (and
+// drops the staggered delay) enough to actually finish before the element
+// scrolls past — normal/slow scrolling keeps the default timing untouched.
+// Sampled every animation frame (not from a 'scroll' listener) because
+// IntersectionObserver callbacks aren't guaranteed to fire after a same-tick
+// scroll event has updated the speed — rAF sampling stays accurate regardless
+// of that ordering.
+let lastScrollY = window.scrollY;
+let lastFrameTime = performance.now();
+let currentScrollSpeed = 0; // px/ms
+
+function sampleScrollSpeed(now) {
+  const dt = now - lastFrameTime;
+  if (dt > 0) currentScrollSpeed = Math.abs(window.scrollY - lastScrollY) / dt;
+  lastScrollY = window.scrollY;
+  lastFrameTime = now;
+  requestAnimationFrame(sampleScrollSpeed);
+}
+requestAnimationFrame(sampleScrollSpeed);
+
+const REVEAL_DEFAULT_DURATION = 700; // ms, matches the .reveal CSS transition
+const REVEAL_MIN_DURATION = 180;     // ms floor when scrolling very fast
+const REVEAL_NORMAL_SPEED = 0.3;     // px/ms — typical scroll; default speed at/below this
+const REVEAL_FAST_SPEED = 2.5;       // px/ms — speed at which duration bottoms out
+
 const revealEls = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && revealEls.length) {
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
+        const el = entry.target;
+        if (currentScrollSpeed > REVEAL_NORMAL_SPEED) {
+          const t = Math.min(1, (currentScrollSpeed - REVEAL_NORMAL_SPEED) / (REVEAL_FAST_SPEED - REVEAL_NORMAL_SPEED));
+          const duration = REVEAL_DEFAULT_DURATION - t * (REVEAL_DEFAULT_DURATION - REVEAL_MIN_DURATION);
+          el.style.transitionDuration = `${Math.round(duration)}ms`;
+          el.style.transitionDelay = '0ms';
+        }
+        el.classList.add('is-visible');
+        revealObserver.unobserve(el);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
