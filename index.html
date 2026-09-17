@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-<link rel="stylesheet" href="style.css?v=29">
+<link rel="stylesheet" href="style.css?v=30">
 </head>
 <body>
 
@@ -104,43 +104,61 @@
 
       <div class="pricing-grid">
 
-        <div class="price-card reveal" data-detail="express">
+        <div class="price-card reveal">
           <h3>Express Wash</h3>
-          <p class="price">$89<span>starting</span></p>
-          <ul>
-            <li>Exterior wash</li>
-            <li>Tires &amp; wheels cleaned</li>
-            <li>Quick wipe-down</li>
-            <li>Quick interior vacuum</li>
+          <p class="price">$90<span>starting</span></p>
+          <ul class="price-tiers">
+            <li><span>Small Car / Sedan</span><strong>$90</strong></li>
+            <li><span>Midsize SUV / Crossover</span><strong>$110</strong></li>
+            <li><span>Large SUV / Truck</span><strong>$130</strong></li>
+            <li><span>Oversized</span><strong>$150</strong></li>
           </ul>
-          <button type="button" class="price-card-details" data-detail-trigger="express">View Full Details &rarr;</button>
+          <ul>
+            <li>Quick interior vacuum</li>
+            <li>Interior surfaces wiped down</li>
+            <li>Inside windows wiped</li>
+            <li>Mats vacuumed or washed</li>
+            <li>Full exterior hand wash</li>
+            <li>Wheels, tires &amp; tire shine</li>
+            <li>Exterior windows cleaned</li>
+          </ul>
           <a href="https://clienthub.getjobber.com/hubs/3afedfa0-1c90-452c-a0af-f460705e501e/public/requests/5171490/new" target="_blank" rel="noopener" class="btn btn-outline btn-block">Book Now</a>
         </div>
 
-        <div class="price-card featured reveal reveal-d1" data-detail="refresh">
+        <div class="price-card featured reveal reveal-d1">
           <p class="badge">Most Popular</p>
-          <h3>Refresh Package</h3>
-          <p class="price">$139<span>starting</span></p>
+          <h3>Refresh Detail</h3>
+          <p class="price">$140<span>starting</span></p>
+          <ul class="price-tiers">
+            <li><span>Small Car / Sedan</span><strong>$140</strong></li>
+            <li><span>Midsize SUV / Crossover</span><strong>$175</strong></li>
+            <li><span>Large SUV / Truck</span><strong>$200</strong></li>
+            <li><span>Oversized</span><strong>$240</strong></li>
+          </ul>
           <ul>
             <li>Everything in Express Wash</li>
-            <li>Steam-cleaned interior</li>
-            <li>Interior surfaces scrubbed</li>
             <li>Full vacuum</li>
+            <li>Steam-cleaned interior</li>
+            <li>All plastics &amp; leather scrubbed</li>
           </ul>
-          <button type="button" class="price-card-details" data-detail-trigger="refresh">View Full Details &rarr;</button>
           <a href="https://clienthub.getjobber.com/hubs/3afedfa0-1c90-452c-a0af-f460705e501e/public/requests/5171490/new" target="_blank" rel="noopener" class="btn btn-primary btn-block">Book Now</a>
         </div>
 
-        <div class="price-card reveal reveal-d2" data-detail="restore">
-          <h3>Restore Package</h3>
-          <p class="price">$219<span>starting</span></p>
-          <ul>
-            <li>Everything in Refresh Package</li>
-            <li>Carpet shampooing</li>
-            <li>Iron decontamination</li>
-            <li>Wax/sealant exterior</li>
+        <div class="price-card reveal reveal-d2">
+          <h3>Restore Detail</h3>
+          <p class="price">$240<span>starting</span></p>
+          <ul class="price-tiers">
+            <li><span>Small Car / Sedan</span><strong>$240</strong></li>
+            <li><span>Midsize SUV / Crossover</span><strong>$280</strong></li>
+            <li><span>Large SUV / Truck</span><strong>$320</strong></li>
+            <li><span>Oversized</span><strong>$350</strong></li>
           </ul>
-          <button type="button" class="price-card-details" data-detail-trigger="restore">View Full Details &rarr;</button>
+          <ul>
+            <li>Everything in Refresh Detail</li>
+            <li>Carpet shampoo</li>
+            <li>Clay mitt / iron decontamination treatment</li>
+            <li>Wax &amp; paint sealant (exterior)</li>
+          </ul>
           <a href="https://clienthub.getjobber.com/hubs/3afedfa0-1c90-452c-a0af-f460705e501e/public/requests/5171490/new" target="_blank" rel="noopener" class="btn btn-outline btn-block">Book Now</a>
         </div>
 
@@ -200,7 +218,7 @@
         SudZ is owned and operated by Silas Zeidler, a Danville local who started the business with
         one goal: do quality work and treat every customer right. From a quick exterior wash to a
         full interior restore on a heavily neglected vehicle, every job gets the same attention. We
-        offer three packages &mdash; Express Wash, Refresh Package, and Restore Package &mdash;
+        offer three packages &mdash; Express Wash, Refresh Detail, and Restore Detail &mdash;
         along with add-ons like wax and headlight restoration, and monthly fleet service for local
         businesses.
       </p>
@@ -302,7 +320,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Depends on the package. An Express Wash takes about 90 minutes. A Refresh Package runs 2&ndash;3 hours. A full Restore can take 4&ndash;6 hours depending on condition.</p>
+            <p>Depends on the package. An Express Wash takes about 90 minutes. A Refresh Detail runs 2&ndash;3 hours. A full Restore Detail can take 4&ndash;6 hours depending on condition.</p>
           </div>
         </div>
 
@@ -393,8 +411,8 @@
             <select id="service" name="service">
               <option value="" selected disabled>Select Package</option>
               <option>Express Wash</option>
-              <option>Refresh Package</option>
-              <option>Restore Package</option>
+              <option>Refresh Detail</option>
+              <option>Restore Detail</option>
               <option>Fleet Service</option>
               <option>Not sure yet</option>
             </select>
@@ -457,24 +475,8 @@
   </div>
 </footer>
 
-<div class="package-modal-overlay" id="packageModalOverlay" hidden>
-  <div class="package-modal" role="dialog" aria-modal="true" aria-labelledby="packageModalTitle">
-    <button type="button" class="package-modal-close" id="packageModalClose" aria-label="Close">&times;</button>
-    <p class="package-modal-eyebrow">Package Details</p>
-    <h3 class="package-modal-title" id="packageModalTitle"></h3>
-    <p class="package-modal-price" id="packageModalPrice"></p>
-    <div class="package-modal-section">
-      <p class="package-modal-heading">What's Included</p>
-      <ul class="package-modal-list" id="packageModalIncludes"></ul>
-    </div>
-    <div class="package-modal-section">
-      <p class="package-modal-heading">Full Description</p>
-      <p class="package-modal-description" id="packageModalDescription"></p>
-    </div>
-  </div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-<script src="script.js?v=14"></script>
+<script src="script.js?v=15"></script>
 </body>
 </html>
