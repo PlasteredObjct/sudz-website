@@ -5,7 +5,7 @@
   --pink-dark: #c81468;
   --teal: #17c9c4;
   --teal-dark: #0fa5a1;
-  --gray: #8a8a90;
+  --gray: #9d9da3;
   --gray-light: #3a3a3f;
   --white: #f7f7f8;
   --font-display: 'Bungee', cursive;
@@ -97,7 +97,18 @@ ul { list-style: none; }
 .section-sub.center { margin-left: auto; margin-right: auto; text-align: center; }
 
 .section { position: relative; z-index: 1; padding: 90px 0; }
-.section-dark { background: var(--black-soft); }
+/* Fade into/out of the surrounding black sections instead of a hard color
+   cut at the section boundary — gradient stop distances assume a plain
+   .section on both sides, which holds for every current .section-dark. */
+.section-dark {
+  background: linear-gradient(
+    180deg,
+    var(--black) 0,
+    var(--black-soft) 110px,
+    var(--black-soft) calc(100% - 110px),
+    var(--black) 100%
+  );
+}
 
 /* Header */
 .site-header {
