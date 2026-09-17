@@ -12,8 +12,8 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [ ] Real photos — hero shot, 5 customer-photo strip images, 8 before/after gallery slots
 - [ ] Real videos — for the photo strip / social content, format and length TBD
 - [ ] Finalized detailed pricing per tier — so the pricing section is accurate, not a template
-- [ ] Full add-on list + pricing per package
-- [ ] Add-on pricing specifically (wax, headlight restoration) — names known, prices not
+- [ ] Full add-on list + pricing per package — *once received, also add these to the Jobber online booking form (Products & Services / booking form config), not just the site*
+- [ ] Add-on pricing specifically (wax, headlight restoration) — names known, prices not — *same follow-up: also needs adding to the Jobber booking form once known*
 - [ ] Fleet service pricing/details — flat rate per vehicle; what's the rate and what's included?
 
 ## Build Next
