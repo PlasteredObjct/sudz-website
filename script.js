@@ -9,10 +9,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-document.querySelectorAll('.btn-pending-fsm').forEach(btn => {
-  btn.addEventListener('click', (e) => e.preventDefault());
-});
-
 // Package detail modal — description text is a placeholder template until
 // Silas provides the real per-package write-up (see TODO.md).
 const packageDetails = {
