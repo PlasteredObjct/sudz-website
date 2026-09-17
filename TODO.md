@@ -25,7 +25,9 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] Wire up a backend for the Get a Quote form (email and/or database) — *done and verified 2026-09-16: `server/` is a small Express + Nodemailer service that emails submissions to sudzmobiledetailing8@gmail.com via Gmail SMTP, reverse-proxied through nginx at `/api/quote` (see `docker-compose.yml`, `nginx.conf`). Real Gmail App Password is in `server/.env` (gitignored). Confirmed working with a live browser submission and a real send.*
 - [x] Rename packages to match Silas's naming — *done 2026-09-15, cards, booking form dropdown, and package modal all updated: Express Wash, Refresh Package, Restore Package*
 - [x] ~~Add a fleet service section~~ — *scrapped 2026-09-16, decided against a dedicated section. Fleet is still mentioned in About/FAQ, and "Fleet Service" is selectable in the Get a Quote form's Service dropdown.*
+- [x] Scroll-triggered fade-in animations — *added 2026-09-17, IntersectionObserver + `.reveal`/`.reveal-dN` classes across every section (pricing cards, gallery, about badges, testimonials, FAQ, quote form, contact cards). Reveals once per element, respects `prefers-reduced-motion`. Part of addressing the "looks bland/not professional" feedback from the UI review.*
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
+- [ ] Address the rest of the "bland/not professional" feedback — scroll animations done; placeholder-heavy sections still the main driver (blocked on real photos from Silas), other polish (typography/spacing/imagery) not yet scoped
 - [ ] Optimize the page for mobile format — noted 2026-09-15. *2026-09-17: fixed two confirmed bugs from a UI review — horizontal page overflow (unwrapped email address in Contact section forcing the grid wider than viewport) and the "WE COME TO YOU!" hero ribbon overlapping the vehicle photo placeholder. Broader mobile polish still unscoped.*
 
 ## Open Decisions
