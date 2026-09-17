@@ -60,12 +60,12 @@ ul { list-style: none; }
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 8% 15%, rgba(255,255,255,0.05) 0 40px, transparent 41px),
-    radial-gradient(circle at 22% 65%, rgba(255,255,255,0.04) 0 60px, transparent 61px),
-    radial-gradient(circle at 78% 20%, rgba(255,255,255,0.05) 0 50px, transparent 51px),
-    radial-gradient(circle at 90% 75%, rgba(255,255,255,0.04) 0 70px, transparent 71px),
-    radial-gradient(circle at 55% 45%, rgba(255,255,255,0.03) 0 90px, transparent 91px),
-    radial-gradient(circle at 35% 90%, rgba(255,255,255,0.04) 0 45px, transparent 46px);
+    radial-gradient(circle at 8% 15%, rgba(23,201,196,0.14) 0, rgba(23,201,196,0.04) 28px, transparent 42px),
+    radial-gradient(circle at 22% 65%, rgba(236,35,130,0.12) 0, rgba(236,35,130,0.03) 40px, transparent 62px),
+    radial-gradient(circle at 78% 20%, rgba(236,35,130,0.13) 0, rgba(236,35,130,0.04) 34px, transparent 52px),
+    radial-gradient(circle at 90% 75%, rgba(23,201,196,0.12) 0, rgba(23,201,196,0.03) 48px, transparent 72px),
+    radial-gradient(circle at 55% 45%, rgba(23,201,196,0.09) 0, rgba(23,201,196,0.03) 60px, transparent 92px),
+    radial-gradient(circle at 35% 90%, rgba(236,35,130,0.11) 0, rgba(236,35,130,0.03) 30px, transparent 47px);
   background-repeat: no-repeat;
 }
 
