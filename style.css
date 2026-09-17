@@ -868,37 +868,3 @@ span.flatpickr-weekday {
   .package-modal { padding: 32px 22px; }
   .service-area-inner { font-size: 0.82rem; padding: 10px 16px; }
 }
-
-/* Scroll-reveal animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-.reveal-d1 { transition-delay: 0.08s; }
-.reveal-d2 { transition-delay: 0.16s; }
-.reveal-d3 { transition-delay: 0.24s; }
-.reveal-d4 { transition-delay: 0.32s; }
-.reveal-d5 { transition-delay: 0.4s; }
-
-/* The featured pricing card has its own static scale(); combine it with the
-   reveal transform instead of letting .reveal's translateY override it. */
-.price-card.featured.reveal { transform: scale(1.03) translateY(28px); }
-.price-card.featured.reveal.is-visible { transform: scale(1.03); }
-
-/* On narrow screens the featured card's scale is disabled (see the 860px
-   rule above) — match that here too, at equal specificity, so this wins
-   over the desktop reveal rule at this viewport. */
-@media (max-width: 860px) {
-  .price-card.featured.reveal { transform: translateY(28px); }
-  .price-card.featured.reveal.is-visible { transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
