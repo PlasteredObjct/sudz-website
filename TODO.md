@@ -25,10 +25,10 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] Wire up a backend for the Get a Quote form (email and/or database) — *done and verified 2026-09-16: `server/` is a small Express + Nodemailer service that emails submissions to sudzmobiledetailing8@gmail.com via Gmail SMTP, reverse-proxied through nginx at `/api/quote` (see `docker-compose.yml`, `nginx.conf`). Real Gmail App Password is in `server/.env` (gitignored). Confirmed working with a live browser submission and a real send.*
 - [x] Rename packages to match Silas's naming — *done 2026-09-15, cards, booking form dropdown, and package modal all updated: Express Wash, Refresh Package, Restore Package*
 - [x] ~~Add a fleet service section~~ — *scrapped 2026-09-16, decided against a dedicated section. Fleet is still mentioned in About/FAQ, and "Fleet Service" is selectable in the Get a Quote form's Service dropdown.*
-- [x] ~~Scroll-triggered fade-in animations~~ — *added 2026-09-17 (IntersectionObserver + `.reveal` classes), then removed same day at request — reverted cleanly via `git revert`.*
+- [x] Scroll-triggered fade-in animations — *added, then removed, then re-added 2026-09-17 as one-way only (IntersectionObserver + `.reveal`/`.reveal-dN` classes across every section). Reveals once as you scroll down and stays visible — does not fade back out on scroll-up (that bidirectional version was tried and explicitly rejected).*
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
-- [ ] Address the "bland/not professional" feedback — scroll animations tried and reverted; placeholder-heavy sections still the main driver (blocked on real photos from Silas), other polish (typography/spacing/imagery) not yet scoped
-- [ ] Optimize the page for mobile format — noted 2026-09-15. *2026-09-17: fixed two confirmed bugs from a UI review — horizontal page overflow (unwrapped email address in Contact section forcing the grid wider than viewport) and the "WE COME TO YOU!" hero ribbon overlapping the vehicle photo placeholder. Broader mobile polish still unscoped.*
+- [ ] Address the "bland/not professional" feedback — scroll animations (one-way) are live; placeholder-heavy sections still the main driver (blocked on real photos from Silas), other polish (typography/spacing/imagery) not yet scoped
+- [ ] Optimize the page for mobile format — noted 2026-09-15. *2026-09-17: fixed horizontal page overflow (unwrapped email in Contact section) and hid the hero visual (ribbon + vehicle photo placeholder) entirely on mobile instead of just shrinking it; reordered Contact cards on mobile (Email on top, Phone + Service Area side by side below). Broader mobile polish still unscoped.*
 
 ## Open Decisions
 
@@ -53,7 +53,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 ## Project notes
 
 - Code: `C:\Users\Matth\Desktop\SUDZ-website` → [github.com/PlasteredObjct/sudz-website](https://github.com/PlasteredObjct/sudz-website) (`main`)
-- Pushed through commit `b33a966`. Nothing uncommitted.
+- Pushed through commit `5bd6d76`. Nothing uncommitted.
 - `server/.env` (gitignored, local only) has the real Gmail App Password for `sudzmobiledetailing8@gmail.com` — never commit this file. Regenerate/revoke the App Password from the Gmail account's Security settings if it's ever compromised.
 - Local dev server: `preview_start` name `sudz-site`, port 5173 (static only — the `/api/quote` backend isn't reachable through this, so quote-form submissions will show the fallback error message here by design).
 - Full stack (static site + quote backend, for testing real email sends): `preview_start` name `sudz-fullstack`, or `docker compose up --build`, at port 8080. Requires `server/.env` populated (copy from `server/.env.example`, needs a real Gmail App Password) or the backend container will fail to send mail.
