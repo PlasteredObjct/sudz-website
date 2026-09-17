@@ -697,6 +697,13 @@ span.flatpickr-weekday {
   border-color: var(--pink);
   box-shadow: 0 16px 32px rgba(236,35,130,0.16);
 }
+.about-badge-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+.about-badge-icon svg { width: 100%; height: 100%; }
 .about-badge h4 {
   font-family: var(--font-display);
   font-weight: normal;
@@ -838,6 +845,13 @@ span.flatpickr-weekday {
   border-color: var(--pink);
   box-shadow: 0 16px 32px rgba(236,35,130,0.16);
 }
+.contact-card-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--teal);
+  margin: 0 auto 12px;
+}
+.contact-card-icon svg { width: 100%; height: 100%; }
 .contact-card h4 {
   font-family: var(--font-display);
   color: var(--pink);
