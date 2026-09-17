@@ -1,12 +1,14 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Scroll-reveal animations — fade/slide elements in as they enter the viewport,
-// and back out again if scrolled back past their starting position
+// Scroll-reveal animations — fade/slide elements in as they enter the viewport
 const revealEls = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && revealEls.length) {
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach(el => revealObserver.observe(el));
