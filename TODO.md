@@ -9,7 +9,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 
 - [x] Real About section content — *received 2026-09-14, live on site*
 - [x] Real FAQ questions & answers — *received 2026-09-14, 8 Q&As live on site*
-- [ ] Real photos — hero shot, 5 customer-photo strip images, 8 before/after gallery slots
+- [ ] Real photos — hero shot, 5 customer-photo strip images, 8 before/after gallery slots — *once these go in, also add an infinite conveyor-belt/marquee animation to the photo strip (currently a static 5-slot grid, no motion). Requested 2026-09-17, deferred until real photos are ready.*
 - [ ] Real videos — for the photo strip / social content, format and length TBD
 - [ ] Finalized detailed pricing per tier — so the pricing section is accurate, not a template
 - [ ] Full add-on list + pricing per package — *once received, also add these to the Jobber online booking form (Products & Services / booking form config), not just the site*
