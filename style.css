@@ -15,7 +15,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 
 /* Scrollbar */
 html { scrollbar-color: var(--teal-dark) var(--black-soft); scrollbar-width: thin; }
@@ -33,7 +33,6 @@ body {
   color: var(--white);
   font-family: var(--font-body);
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 .container {
@@ -112,8 +111,11 @@ ul { list-style: none; }
 
 /* Header */
 .site-header {
-  position: sticky;
-  top: 0;
+  /* Sticks to the top on desktop only (see the 861px+ media query below) —
+     on mobile/tablet it scrolls away normally like the rest of the page.
+     Stays `relative` (not `static`) here so it remains a positioned
+     containing block for the mobile nav dropdown at all times. */
+  position: relative;
   z-index: 50;
   background: rgba(12,12,14,0.85);
   backdrop-filter: blur(8px);
@@ -123,15 +125,23 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
+  height: 62px;
 }
 
 .logo-img {
-  height: 52px;
+  height: 42px;
   width: auto;
   display: block;
 }
 .logo-img.small { height: 38px; }
+
+/* Desktop-only: header sticks to the top while scrolling. Section targets
+   get scroll-margin-top so an in-page nav link doesn't land with its
+   heading hidden under the now-fixed header. */
+@media (min-width: 861px) {
+  .site-header { position: sticky; top: 0; }
+  section[id] { scroll-margin-top: 90px; }
+}
 
 .main-nav {
   display: flex;
@@ -925,7 +935,7 @@ span.flatpickr-weekday {
 @media (max-width: 640px) {
   .main-nav {
     position: absolute;
-    top: 76px;
+    top: 63px;
     left: 0;
     right: 0;
     background: var(--black-soft);
