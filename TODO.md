@@ -26,13 +26,13 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 - [x] Rename packages to match Silas's naming — *done 2026-09-15, cards, booking form dropdown, and package modal all updated: Express Wash, Refresh Package, Restore Package*
 - [x] ~~Add a fleet service section~~ — *scrapped 2026-09-16, decided against a dedicated section. Fleet is still mentioned in About/FAQ, and "Fleet Service" is selectable in the Get a Quote form's Service dropdown.*
 - [ ] Surface add-ons on the site (wax, headlight restoration) — feeds the package modal
-- [ ] Optimize the page for mobile format — noted 2026-09-15, not scoped yet
+- [ ] Optimize the page for mobile format — noted 2026-09-15. *2026-09-17: fixed two confirmed bugs from a UI review — horizontal page overflow (unwrapped email address in Contact section forcing the grid wider than viewport) and the "WE COME TO YOU!" hero ribbon overlapping the vehicle photo placeholder. Broader mobile polish still unscoped.*
 
 ## Open Decisions
 
 - [x] **Pricing conflict** — *fixed 2026-09-16: FAQ's "base rates start at $80" corrected to $89 to match the Express Wash card. Both now say pricing starts there and varies by size/condition.*
 - [x] Which external site should "Book Now" redirect to? — *decided and wired 2026-09-17: Jobber (see Build Next above).*
-- [ ] What should the Get a Quote form actually collect vs. the old booking form?
+- [x] What should the Get a Quote form actually collect vs. the old booking form? — *simplified 2026-09-17: replaced the cascading Vehicle Make/Model selects (+ "Other" specify fields) with one free-text "Vehicle Year, Make & Model" input. Form is down to 7 fields: Name, Phone, Email, Service, Preferred Date (optional), Vehicle, Location.*
 - [ ] Confirm About/FAQ copy with partner — real copy is committed and live, pending sign-off
 - [x] Backend approach — *decided 2026-09-16: custom Express relay in its own Docker service (`server/`), sends via Gmail SMTP rather than a raw mail server.*
 
@@ -51,7 +51,7 @@ Owner: Silas Zeidler · Danville, VA · 434-489-1525
 ## Project notes
 
 - Code: `C:\Users\Matth\Desktop\SUDZ-website` → [github.com/PlasteredObjct/sudz-website](https://github.com/PlasteredObjct/sudz-website) (`main`)
-- Pushed through commit `ce5fc32`. **Not yet pushed:** Jobber booking link + this TODO update (local commit `5a696a4` and later).
+- Pushed through commit `2f6e7a6`. Nothing uncommitted.
 - `server/.env` (gitignored, local only) has the real Gmail App Password for `sudzmobiledetailing8@gmail.com` — never commit this file. Regenerate/revoke the App Password from the Gmail account's Security settings if it's ever compromised.
 - Local dev server: `preview_start` name `sudz-site`, port 5173 (static only — the `/api/quote` backend isn't reachable through this, so quote-form submissions will show the fallback error message here by design).
 - Full stack (static site + quote backend, for testing real email sends): `preview_start` name `sudz-fullstack`, or `docker compose up --build`, at port 8080. Requires `server/.env` populated (copy from `server/.env.example`, needs a real Gmail App Password) or the backend container will fail to send mail.
