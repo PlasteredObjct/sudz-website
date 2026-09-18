@@ -199,7 +199,19 @@ let lightboxIndex = 0;
 // matching .lightbox-img.is-portrait rule in style.css.
 const LIGHTBOX_PORTRAIT_RATIO = 0.7;
 
+// Holds whichever zoom-in/zoom-out transitionend handler is currently
+// pending, so a forced reset (closing, switching photos) can cancel it —
+// otherwise a stale handler could fire later, on a different photo, with
+// leftover click-position values from the interaction it was meant for.
+let lightboxZoomTransitionHandler = null;
+let lightboxNaturalSize = null;
+
 function resetLightboxZoom() {
+  if (lightboxZoomTransitionHandler) {
+    lightboxImg.removeEventListener('transitionend', lightboxZoomTransitionHandler);
+    lightboxZoomTransitionHandler = null;
+  }
+  lightboxNaturalSize = null;
   lightboxImg.classList.remove('zoomed');
   lightbox.classList.remove('zoom-active');
   lightboxImg.style.width = '';
@@ -264,40 +276,81 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 // Click-to-zoom, desktop only — a tap on touch is just how you view the
-// photo there, not a zoom request, so this stays out of its way. Zooming
-// sets an explicit pixel width/height (rather than a transform, animated
-// via the CSS transition on .lightbox-img) so the enlarged image actually
-// contributes to the lightbox's scrollable area, and the scroll position
-// centers on wherever the visitor clicked so they land on the detail they
-// zoomed in on, then can scroll to pan.
+// photo there, not a zoom request, so this stays out of its way. Only the
+// photo itself grows (via the CSS transition on .lightbox-img's width/
+// height) — the close button and arrows are positioned absolutely and
+// never move.
 const LIGHTBOX_ZOOM_SCALE = 1.4;
 const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+function zoomInLightbox(e) {
+  const rect = lightboxImg.getBoundingClientRect();
+  const fracX = (e.clientX - rect.left) / rect.width;
+  const fracY = (e.clientY - rect.top) / rect.height;
+  lightboxNaturalSize = { width: rect.width, height: rect.height };
+  const newWidth = rect.width * LIGHTBOX_ZOOM_SCALE;
+  const newHeight = rect.height * LIGHTBOX_ZOOM_SCALE;
+
+  // Freeze the current on-screen size as an explicit pixel value first, so
+  // the transition to the zoomed size has a real number to animate from —
+  // animating straight from an unset ("auto") width/height isn't reliable
+  // across browsers and can just snap instead of animating.
+  lightboxImg.style.width = rect.width + 'px';
+  lightboxImg.style.height = rect.height + 'px';
+  lightboxImg.classList.add('zoomed');
+  lightbox.classList.add('zoom-active');
+  // Center on each axis only while the zoomed image still fits there —
+  // once it overflows an axis, a centered flex item clips its start edge
+  // out of scroll reach, so that axis has to switch to flex-start instead.
+  lightbox.style.justifyContent = newWidth > lightbox.clientWidth ? 'flex-start' : 'center';
+  lightbox.style.alignItems = newHeight > lightbox.clientHeight ? 'flex-start' : 'center';
+
+  // Double rAF: let the browser paint the frozen starting size on its own
+  // frame before changing to the target, otherwise the two style writes
+  // can get batched into one and the transition never plays.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    lightboxImg.style.width = newWidth + 'px';
+    lightboxImg.style.height = newHeight + 'px';
+  }));
+
+  // Scroll to center on the clicked point only once the grow animation
+  // finishes — the container's scrollable size isn't final until then,
+  // so scrolling mid-transition would land short of the intended spot.
+  const onZoomIn = (ev) => {
+    if (ev.target !== lightboxImg || ev.propertyName !== 'width') return;
+    lightboxImg.removeEventListener('transitionend', onZoomIn);
+    lightboxZoomTransitionHandler = null;
+    lightbox.scrollLeft = fracX * newWidth - lightbox.clientWidth / 2;
+    lightbox.scrollTop = fracY * newHeight - lightbox.clientHeight / 2;
+  };
+  lightboxZoomTransitionHandler = onZoomIn;
+  lightboxImg.addEventListener('transitionend', onZoomIn);
+}
+
+function zoomOutLightbox() {
+  if (!lightboxNaturalSize) {
+    resetLightboxZoom();
+    return;
+  }
+  lightboxImg.style.width = lightboxNaturalSize.width + 'px';
+  lightboxImg.style.height = lightboxNaturalSize.height + 'px';
+  const onZoomOut = (ev) => {
+    if (ev.target !== lightboxImg || ev.propertyName !== 'width') return;
+    lightboxImg.removeEventListener('transitionend', onZoomOut);
+    lightboxZoomTransitionHandler = null;
+    resetLightboxZoom();
+  };
+  lightboxZoomTransitionHandler = onZoomOut;
+  lightboxImg.addEventListener('transitionend', onZoomOut);
+}
+
 if (isDesktopPointer) {
   lightboxImg.addEventListener('click', (e) => {
     if (lightboxImg.classList.contains('zoomed')) {
-      resetLightboxZoom();
-      return;
+      zoomOutLightbox();
+    } else {
+      zoomInLightbox(e);
     }
-    const rect = lightboxImg.getBoundingClientRect();
-    const fracX = (e.clientX - rect.left) / rect.width;
-    const fracY = (e.clientY - rect.top) / rect.height;
-    const newWidth = rect.width * LIGHTBOX_ZOOM_SCALE;
-    const newHeight = rect.height * LIGHTBOX_ZOOM_SCALE;
-    lightboxImg.classList.add('zoomed');
-    lightbox.classList.add('zoom-active');
-    lightboxImg.style.width = newWidth + 'px';
-    lightboxImg.style.height = newHeight + 'px';
-    // Center on each axis only while the zoomed image still fits there —
-    // once it overflows an axis, a centered flex item clips its start
-    // edge out of scroll reach, so that axis has to switch to flex-start
-    // instead. This is what was going wrong: on a wide screen the zoomed
-    // width often still fits, but the old code force-left-aligned both
-    // axes regardless, pinning the image to the left edge instead of
-    // keeping it centered.
-    lightbox.style.justifyContent = newWidth > lightbox.clientWidth ? 'flex-start' : 'center';
-    lightbox.style.alignItems = newHeight > lightbox.clientHeight ? 'flex-start' : 'center';
-    lightbox.scrollLeft = fracX * newWidth - lightbox.clientWidth / 2;
-    lightbox.scrollTop = fracY * newHeight - lightbox.clientHeight / 2;
   });
 }
 document.addEventListener('keydown', (e) => {
