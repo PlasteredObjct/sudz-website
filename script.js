@@ -204,6 +204,7 @@ function showLightboxPhoto() {
   lightboxImg.src = photo.src;
   lightboxImg.alt = photo.alt;
   lightboxImg.classList.toggle('is-portrait', photo.ratio < LIGHTBOX_PORTRAIT_RATIO);
+  lightboxImg.classList.remove('zoomed');
 }
 
 function openLightbox(photos, index) {
@@ -252,6 +253,14 @@ lightboxNext.addEventListener('click', () => stepLightbox(1));
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
+// Click-to-zoom, desktop only — a tap on touch is just how you view the
+// photo there, not a zoom request, so this stays out of its way.
+const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (isDesktopPointer) {
+  lightboxImg.addEventListener('click', () => {
+    lightboxImg.classList.toggle('zoomed');
+  });
+}
 document.addEventListener('keydown', (e) => {
   if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape') closeLightbox();
