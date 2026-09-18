@@ -494,6 +494,29 @@ ul { list-style: none; }
 }
 .ba-after span { color: var(--teal); }
 
+/* Real photo dropped into a slot — kill the placeholder treatment and
+   let the image fill the box, with the Before/After pill overlaid in
+   the corner instead of centered. */
+.ba-photo.has-photo {
+  border: none;
+  background: none;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.ba-photo.has-photo::before { display: none; }
+.ba-photo.has-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ba-photo.has-photo span {
+  position: relative;
+  z-index: 1;
+  margin: 10px;
+}
+
 /* Quote */
 .quote-inner {
   display: grid;
