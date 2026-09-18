@@ -199,12 +199,19 @@ let lightboxIndex = 0;
 // matching .lightbox-img.is-portrait rule in style.css.
 const LIGHTBOX_PORTRAIT_RATIO = 0.7;
 
+function resetLightboxZoom() {
+  lightboxImg.classList.remove('zoomed');
+  lightbox.classList.remove('zoom-active');
+  lightboxImg.style.width = '';
+  lightboxImg.style.height = '';
+}
+
 function showLightboxPhoto() {
   const photo = lightboxPhotos[lightboxIndex];
   lightboxImg.src = photo.src;
   lightboxImg.alt = photo.alt;
   lightboxImg.classList.toggle('is-portrait', photo.ratio < LIGHTBOX_PORTRAIT_RATIO);
-  lightboxImg.classList.remove('zoomed');
+  resetLightboxZoom();
 }
 
 function openLightbox(photos, index) {
@@ -223,6 +230,7 @@ function closeLightbox() {
   lightbox.classList.remove('open');
   lightbox.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  resetLightboxZoom();
 }
 
 function stepLightbox(delta) {
@@ -254,11 +262,30 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 // Click-to-zoom, desktop only — a tap on touch is just how you view the
-// photo there, not a zoom request, so this stays out of its way.
+// photo there, not a zoom request, so this stays out of its way. Zooming
+// sets an explicit pixel width/height (rather than a transform) so the
+// enlarged image actually contributes to the lightbox's scrollable area,
+// and the scroll position is centered on wherever the visitor clicked so
+// they land on the detail they zoomed in on, then can scroll to pan.
+const LIGHTBOX_ZOOM_SCALE = 1.8;
 const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 if (isDesktopPointer) {
-  lightboxImg.addEventListener('click', () => {
-    lightboxImg.classList.toggle('zoomed');
+  lightboxImg.addEventListener('click', (e) => {
+    if (lightboxImg.classList.contains('zoomed')) {
+      resetLightboxZoom();
+      return;
+    }
+    const rect = lightboxImg.getBoundingClientRect();
+    const fracX = (e.clientX - rect.left) / rect.width;
+    const fracY = (e.clientY - rect.top) / rect.height;
+    const newWidth = rect.width * LIGHTBOX_ZOOM_SCALE;
+    const newHeight = rect.height * LIGHTBOX_ZOOM_SCALE;
+    lightboxImg.classList.add('zoomed');
+    lightbox.classList.add('zoom-active');
+    lightboxImg.style.width = newWidth + 'px';
+    lightboxImg.style.height = newHeight + 'px';
+    lightbox.scrollLeft = fracX * newWidth - lightbox.clientWidth / 2;
+    lightbox.scrollTop = fracY * newHeight - lightbox.clientHeight / 2;
   });
 }
 document.addEventListener('keydown', (e) => {

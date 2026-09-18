@@ -980,12 +980,19 @@ span.flatpickr-weekday {
   background: rgba(6,6,8,0.92);
 }
 .lightbox.open { display: flex; }
+/* Zoomed state scrolls/pans instead of centering — see the JS, which
+   sets explicit pixel width/height (not transform) so the enlarged
+   image actually contributes to the container's scrollable area. */
+.lightbox.zoom-active {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+}
 .lightbox-img {
   max-width: 88vw;
   max-height: 84vh;
   border-radius: 12px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55);
-  transition: transform 0.25s ease;
 }
 /* Tall phone-shot photos (before/after gallery, roughly 9:16) are
    width-limited by max-width long before they hit max-height, so they
@@ -995,12 +1002,17 @@ span.flatpickr-weekday {
   max-width: 96vw;
   max-height: 94vh;
 }
+.lightbox-img.zoomed {
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+}
 /* Click-to-zoom — desktop (fine pointer + real hover) only. Touch
    devices don't get the zoom cursor or the toggle, since a tap there
    is just how you'd view the photo, not a request to zoom. */
 @media (hover: hover) and (pointer: fine) {
   .lightbox-img { cursor: zoom-in; }
-  .lightbox-img.zoomed { cursor: zoom-out; transform: scale(1.8); }
+  .lightbox-img.zoomed { cursor: zoom-out; }
 }
 .lightbox-close,
 .lightbox-arrow {
