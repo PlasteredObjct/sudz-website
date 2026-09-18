@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-<link rel="stylesheet" href="style.css?v=34">
+<link rel="stylesheet" href="style.css?v=35">
 </head>
 <body>
 
@@ -89,8 +89,8 @@
   </section>
 
   <div class="photo-strip">
-    <div class="photo-strip-item reveal"><span>Photo Coming Soon</span></div>
-    <div class="photo-strip-item reveal reveal-d1"><span>Photo Coming Soon</span></div>
+    <div class="photo-strip-item has-photo reveal"><img src="assets/gallery/strip-1.jpg" alt="Detailed Subaru front view" loading="lazy"></div>
+    <div class="photo-strip-item has-photo reveal reveal-d1"><img src="assets/gallery/strip-2.jpg" alt="Detailed GMC Sierra side view" loading="lazy"></div>
     <div class="photo-strip-item reveal reveal-d2"><span>Photo Coming Soon</span></div>
     <div class="photo-strip-item reveal reveal-d3"><span>Photo Coming Soon</span></div>
     <div class="photo-strip-item reveal reveal-d4"><span>Photo Coming Soon</span></div>
@@ -475,8 +475,14 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-<script src="script.js?v=15"></script>
+<script src="script.js?v=16"></script>
 </body>
 </html>

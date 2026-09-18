@@ -183,3 +183,64 @@ quoteForm.addEventListener('submit', async (e) => {
   }
 });
 
+// Lightbox — click a real photo-strip photo to view it full-screen, with
+// prev/next arrows cycling through every real strip photo (placeholders
+// aren't clickable, so they're excluded from the list).
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function showLightboxPhoto() {
+  const photo = lightboxPhotos[lightboxIndex];
+  lightboxImg.src = photo.src;
+  lightboxImg.alt = photo.alt;
+}
+
+function openLightbox(photos, index) {
+  lightboxPhotos = photos;
+  lightboxIndex = index;
+  showLightboxPhoto();
+  const showArrows = lightboxPhotos.length > 1;
+  lightboxPrev.classList.toggle('is-hidden', !showArrows);
+  lightboxNext.classList.toggle('is-hidden', !showArrows);
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function stepLightbox(delta) {
+  lightboxIndex = (lightboxIndex + delta + lightboxPhotos.length) % lightboxPhotos.length;
+  showLightboxPhoto();
+}
+
+document.querySelectorAll('.photo-strip-item.has-photo img').forEach((img, i, allImgs) => {
+  img.addEventListener('click', () => {
+    const photos = Array.from(allImgs).map(el => ({ src: el.src, alt: el.alt }));
+    openLightbox(photos, i);
+  });
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', () => stepLightbox(-1));
+lightboxNext.addEventListener('click', () => stepLightbox(1));
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') stepLightbox(-1);
+  if (e.key === 'ArrowRight') stepLightbox(1);
+});
+
