@@ -204,6 +204,8 @@ function resetLightboxZoom() {
   lightbox.classList.remove('zoom-active');
   lightboxImg.style.width = '';
   lightboxImg.style.height = '';
+  lightbox.style.justifyContent = '';
+  lightbox.style.alignItems = '';
 }
 
 function showLightboxPhoto() {
@@ -263,11 +265,12 @@ lightbox.addEventListener('click', (e) => {
 });
 // Click-to-zoom, desktop only — a tap on touch is just how you view the
 // photo there, not a zoom request, so this stays out of its way. Zooming
-// sets an explicit pixel width/height (rather than a transform) so the
-// enlarged image actually contributes to the lightbox's scrollable area,
-// and the scroll position is centered on wherever the visitor clicked so
-// they land on the detail they zoomed in on, then can scroll to pan.
-const LIGHTBOX_ZOOM_SCALE = 1.8;
+// sets an explicit pixel width/height (rather than a transform, animated
+// via the CSS transition on .lightbox-img) so the enlarged image actually
+// contributes to the lightbox's scrollable area, and the scroll position
+// centers on wherever the visitor clicked so they land on the detail they
+// zoomed in on, then can scroll to pan.
+const LIGHTBOX_ZOOM_SCALE = 1.4;
 const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 if (isDesktopPointer) {
   lightboxImg.addEventListener('click', (e) => {
@@ -284,6 +287,15 @@ if (isDesktopPointer) {
     lightbox.classList.add('zoom-active');
     lightboxImg.style.width = newWidth + 'px';
     lightboxImg.style.height = newHeight + 'px';
+    // Center on each axis only while the zoomed image still fits there —
+    // once it overflows an axis, a centered flex item clips its start
+    // edge out of scroll reach, so that axis has to switch to flex-start
+    // instead. This is what was going wrong: on a wide screen the zoomed
+    // width often still fits, but the old code force-left-aligned both
+    // axes regardless, pinning the image to the left edge instead of
+    // keeping it centered.
+    lightbox.style.justifyContent = newWidth > lightbox.clientWidth ? 'flex-start' : 'center';
+    lightbox.style.alignItems = newHeight > lightbox.clientHeight ? 'flex-start' : 'center';
     lightbox.scrollLeft = fracX * newWidth - lightbox.clientWidth / 2;
     lightbox.scrollTop = fracY * newHeight - lightbox.clientHeight / 2;
   });

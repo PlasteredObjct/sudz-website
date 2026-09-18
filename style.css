@@ -980,12 +980,13 @@ span.flatpickr-weekday {
   background: rgba(6,6,8,0.92);
 }
 .lightbox.open { display: flex; }
-/* Zoomed state scrolls/pans instead of centering — see the JS, which
-   sets explicit pixel width/height (not transform) so the enlarged
-   image actually contributes to the container's scrollable area. */
+/* Zoomed state allows scrolling/panning — see the JS, which sets
+   explicit pixel width/height (not transform) so the enlarged image
+   actually contributes to the container's scrollable area, and sets
+   justify-content/align-items per axis: centered while that axis still
+   fits, flex-start once it overflows (a centered-but-overflowing flex
+   item clips its start edge out of scroll reach, so it has to switch). */
 .lightbox.zoom-active {
-  align-items: flex-start;
-  justify-content: flex-start;
   overflow: auto;
 }
 .lightbox-img {
@@ -993,6 +994,7 @@ span.flatpickr-weekday {
   max-height: 84vh;
   border-radius: 12px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  transition: width 0.25s ease, height 0.25s ease;
 }
 /* Tall phone-shot photos (before/after gallery, roughly 9:16) are
    width-limited by max-width long before they hit max-height, so they
