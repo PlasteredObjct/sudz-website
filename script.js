@@ -224,12 +224,18 @@ function stepLightbox(delta) {
   showLightboxPhoto();
 }
 
-document.querySelectorAll('.photo-strip-item.has-photo img').forEach((img, i, allImgs) => {
-  img.addEventListener('click', () => {
-    const photos = Array.from(allImgs).map(el => ({ src: el.src, alt: el.alt }));
-    openLightbox(photos, i);
+function bindLightboxGroup(selector) {
+  document.querySelectorAll(selector).forEach((img, i, allImgs) => {
+    img.addEventListener('click', () => {
+      const photos = Array.from(allImgs).map(el => ({ src: el.src, alt: el.alt }));
+      openLightbox(photos, i);
+    });
   });
-});
+}
+// Each group cycles through its own photos only — clicking a gallery
+// before/after shot shouldn't jump into the unrelated photo strip.
+bindLightboxGroup('.photo-strip-item.has-photo img');
+bindLightboxGroup('.ba-photo.has-photo img');
 
 lightboxClose.addEventListener('click', closeLightbox);
 lightboxPrev.addEventListener('click', () => stepLightbox(-1));
