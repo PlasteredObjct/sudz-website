@@ -195,10 +195,15 @@ const lightboxNext = document.getElementById('lightboxNext');
 let lightboxPhotos = [];
 let lightboxIndex = 0;
 
+// Tall phone-shot photos (roughly 9:16) get extra display room — see the
+// matching .lightbox-img.is-portrait rule in style.css.
+const LIGHTBOX_PORTRAIT_RATIO = 0.7;
+
 function showLightboxPhoto() {
   const photo = lightboxPhotos[lightboxIndex];
   lightboxImg.src = photo.src;
   lightboxImg.alt = photo.alt;
+  lightboxImg.classList.toggle('is-portrait', photo.ratio < LIGHTBOX_PORTRAIT_RATIO);
 }
 
 function openLightbox(photos, index) {
@@ -227,7 +232,11 @@ function stepLightbox(delta) {
 function bindLightboxGroup(selector) {
   document.querySelectorAll(selector).forEach((img, i, allImgs) => {
     img.addEventListener('click', () => {
-      const photos = Array.from(allImgs).map(el => ({ src: el.src, alt: el.alt }));
+      const photos = Array.from(allImgs).map(el => ({
+        src: el.src,
+        alt: el.alt,
+        ratio: el.naturalWidth / el.naturalHeight
+      }));
       openLightbox(photos, i);
     });
   });

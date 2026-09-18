@@ -986,6 +986,14 @@ span.flatpickr-weekday {
   border-radius: 12px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55);
 }
+/* Tall phone-shot photos (before/after gallery, roughly 9:16) are
+   width-limited by max-width long before they hit max-height, so they
+   render small with empty space above/below — give them more headroom
+   on both axes so they actually fill the screen. */
+.lightbox-img.is-portrait {
+  max-width: 96vw;
+  max-height: 94vh;
+}
 .lightbox-close,
 .lightbox-arrow {
   position: absolute;
