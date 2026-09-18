@@ -985,9 +985,21 @@ span.flatpickr-weekday {
    actually contributes to the container's scrollable area, and sets
    justify-content/align-items per axis: centered while that axis still
    fits, flex-start once it overflows (a centered-but-overflowing flex
-   item clips its start edge out of scroll reach, so it has to switch). */
+   item clips its start edge out of scroll reach, so it has to switch).
+   The scrollbar itself is hidden (scrolling still works via wheel/
+   trackpad/drag) — a native scrollbar appearing mid-animation, as the
+   zoomed image crosses the viewport edge, reserves gutter space and
+   reflows everything, which is what was making the zoom-in look shaky. */
 .lightbox.zoom-active {
   overflow: auto;
+  scrollbar-width: none;
+}
+.lightbox.zoom-active::-webkit-scrollbar { display: none; }
+/* Wraps the image (and only the image) so the close/arrow buttons,
+   positioned relative to this frame, sit at the photo's own corners and
+   scroll/pan together with it instead of staying pinned to the screen. */
+.lightbox-frame {
+  position: relative;
 }
 .lightbox-img {
   max-width: 88vw;

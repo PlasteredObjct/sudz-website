@@ -276,10 +276,13 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 // Click-to-zoom, desktop only — a tap on touch is just how you view the
-// photo there, not a zoom request, so this stays out of its way. Only the
-// photo itself grows (via the CSS transition on .lightbox-img's width/
-// height) — the close button and arrows are positioned absolutely and
-// never move.
+// photo there, not a zoom request, so this stays out of its way. The
+// close button and arrows live inside .lightbox-frame alongside the
+// image (see index.html/style.css), positioned relative to it — so
+// during the zoom animation only the photo's own size changes (the
+// buttons don't animate independently), and once zoomed, panning
+// scrolls the buttons right along with the photo instead of leaving
+// them pinned to the screen.
 const LIGHTBOX_ZOOM_SCALE = 1.4;
 const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -299,11 +302,12 @@ function zoomInLightbox(e) {
   lightboxImg.style.height = rect.height + 'px';
   lightboxImg.classList.add('zoomed');
   lightbox.classList.add('zoom-active');
-  // Center on each axis only while the zoomed image still fits there —
-  // once it overflows an axis, a centered flex item clips its start edge
-  // out of scroll reach, so that axis has to switch to flex-start instead.
-  lightbox.style.justifyContent = newWidth > lightbox.clientWidth ? 'flex-start' : 'center';
-  lightbox.style.alignItems = newHeight > lightbox.clientHeight ? 'flex-start' : 'center';
+  // Stay centered (the lightbox's default alignment) for the whole grow
+  // animation. Switching to flex-start up front — before any growth had
+  // actually happened — snapped the image to a corner and then grew it
+  // from there, which is what made the zoom-in look shaky. Alignment only
+  // needs to change on axes that end up overflowing, so that's deferred
+  // to transitionend below, alongside the click-position scroll.
 
   // Double rAF: let the browser paint the frozen starting size on its own
   // frame before changing to the target, otherwise the two style writes
@@ -313,13 +317,18 @@ function zoomInLightbox(e) {
     lightboxImg.style.height = newHeight + 'px';
   }));
 
-  // Scroll to center on the clicked point only once the grow animation
-  // finishes — the container's scrollable size isn't final until then,
-  // so scrolling mid-transition would land short of the intended spot.
+  // Only once the grow animation finishes: switch alignment to flex-start
+  // on whichever axes now overflow (a centered-but-overflowing flex item
+  // clips its start edge out of scroll reach), and scroll to center on
+  // the clicked point — the container's scrollable size isn't final
+  // until the animation ends, so doing either mid-transition would land
+  // short of the intended spot.
   const onZoomIn = (ev) => {
     if (ev.target !== lightboxImg || ev.propertyName !== 'width') return;
     lightboxImg.removeEventListener('transitionend', onZoomIn);
     lightboxZoomTransitionHandler = null;
+    lightbox.style.justifyContent = newWidth > lightbox.clientWidth ? 'flex-start' : 'center';
+    lightbox.style.alignItems = newHeight > lightbox.clientHeight ? 'flex-start' : 'center';
     lightbox.scrollLeft = fracX * newWidth - lightbox.clientWidth / 2;
     lightbox.scrollTop = fracY * newHeight - lightbox.clientHeight / 2;
   };
