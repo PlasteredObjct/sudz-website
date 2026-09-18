@@ -823,7 +823,33 @@ span.flatpickr-weekday {
   .price-card.featured { transform: none; }
   .ba-groups { grid-template-columns: 1fr; gap: 24px; }
   .quote-inner { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Email spans the top row on its own; Phone and Service Area share the
+     row below — keeps the 3-card grid balanced instead of leaving the
+     third card alone with empty space next to it. */
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "email email" "phone area";
+  }
+  .contact-card:nth-child(1) { grid-area: phone; }
+  .contact-card:nth-child(2) { grid-area: email; }
+  .contact-card:nth-child(3) { grid-area: area; }
+  /* Hamburger nav takes over here (not just phones) — below this width the
+     full inline nav ("Services Gallery About Reviews FAQ Get a Quote
+     Contact") doesn't fit and wraps mid-phrase (e.g. "Get a" / "Quote"). */
+  .main-nav {
+    position: absolute;
+    top: 63px;
+    left: 0;
+    right: 0;
+    background: var(--black-soft);
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 18px;
+    display: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .main-nav.open { display: flex; }
+  .nav-toggle { display: flex; }
   /* Phone and Email cards are actionable (tel:/mailto:) on touch
      breakpoints — make the whole card tappable, not just the link text. */
   .contact-card:nth-child(1),
@@ -859,28 +885,7 @@ span.flatpickr-weekday {
 }
 
 @media (max-width: 640px) {
-  .main-nav {
-    position: absolute;
-    top: 63px;
-    left: 0;
-    right: 0;
-    background: var(--black-soft);
-    flex-direction: column;
-    padding: 20px 24px;
-    gap: 18px;
-    display: none;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .main-nav.open { display: flex; }
-  .nav-toggle { display: flex; }
   .form-row-split { grid-template-columns: 1fr; }
-  .contact-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "email email" "phone area";
-  }
-  .contact-card:nth-child(1) { grid-area: phone; }
-  .contact-card:nth-child(2) { grid-area: email; }
-  .contact-card:nth-child(3) { grid-area: area; }
   .hero { padding: 60px 0; }
   .utility-follow { display: none; }
   .utility-inner { gap: 8px 20px; }
