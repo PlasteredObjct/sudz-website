@@ -217,7 +217,6 @@ ul { list-style: none; }
 .utility-phone { color: var(--teal); }
 .utility-phone:hover { color: var(--white); }
 .utility-icon { margin-right: 4px; }
-.utility-divider { color: var(--gray); font-weight: 500; }
 .utility-follow { color: var(--gray); font-weight: 500; }
 .utility-social { display: flex; align-items: center; gap: 14px; }
 .social-icon { color: var(--gray); display: flex; transition: color 0.2s; }
