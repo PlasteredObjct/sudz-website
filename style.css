@@ -255,6 +255,23 @@ ul { list-style: none; }
   gap: 60px;
   align-items: center;
 }
+/* Launch without photos — hides the hero photo and the photo strip
+   (the Before & After gallery is left alone) until real photos are
+   ready. To bring them back, just remove the "hidden-for-launch"
+   class from the hero-visual and photo-strip elements in index.html;
+   these rules do nothing once that class is gone. */
+.hidden-for-launch { display: none !important; }
+.hero-inner:has(.hero-visual.hidden-for-launch) {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+.hero-inner:has(.hero-visual.hidden-for-launch) .hero-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-inner:has(.hero-visual.hidden-for-launch) .hero-cta {
+  justify-content: center;
+}
 .hero-tagline {
   color: var(--gray);
   font-size: 0.9rem;
