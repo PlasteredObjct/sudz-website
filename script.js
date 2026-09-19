@@ -140,6 +140,15 @@ const quoteSubmitBtn = quoteForm.querySelector('button[type="submit"]');
 
 const phoneInput = document.getElementById('phone');
 phoneInput.addEventListener('input', () => {
+  // Reformatting always reassigns .value, which resets the caret to the
+  // end — fine for typing straight through, but it means editing a typo
+  // in the middle of the number kept bumping the cursor to the end after
+  // every keystroke. Work out how many digits sat before the caret in
+  // the pre-reformat value, then after reformatting, walk forward the
+  // same number of digits and place the caret right after that point.
+  const caret = phoneInput.selectionStart;
+  const digitsBeforeCaret = phoneInput.value.slice(0, caret).replace(/\D/g, '').length;
+
   const digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
   if (digits.length > 6) {
     phoneInput.value = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
@@ -150,6 +159,13 @@ phoneInput.addEventListener('input', () => {
   } else {
     phoneInput.value = '';
   }
+
+  let seen = 0, pos = 0;
+  while (pos < phoneInput.value.length && seen < digitsBeforeCaret) {
+    if (/\d/.test(phoneInput.value[pos])) seen++;
+    pos++;
+  }
+  phoneInput.setSelectionRange(pos, pos);
 });
 
 quoteForm.addEventListener('submit', async (e) => {

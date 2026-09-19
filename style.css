@@ -763,7 +763,11 @@ span.flatpickr-weekday {
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
-.faq-item.open .faq-answer { max-height: 300px; }
+/* Generously above the tallest real answer's rendered height (the longest
+   one wraps to ~336px on narrow mobile widths) so nothing clips — the
+   max-height transition still feels the same speed either way, since it
+   stops animating once the content's actual height is reached. */
+.faq-item.open .faq-answer { max-height: 600px; }
 .faq-answer p {
   color: var(--gray);
   font-size: 0.95rem;
