@@ -980,33 +980,24 @@ span.flatpickr-weekday {
   background: rgba(6,6,8,0.92);
 }
 .lightbox.open { display: flex; }
-/* Zoomed state allows scrolling/panning — see the JS, which sets
+/* Zoomed state allows scrolling/panning — see the JS, which sets an
    explicit pixel width/height (not transform) so the enlarged image
    actually contributes to the container's scrollable area, and sets
    justify-content/align-items per axis: centered while that axis still
    fits, flex-start once it overflows (a centered-but-overflowing flex
    item clips its start edge out of scroll reach, so it has to switch).
    The scrollbar itself is hidden (scrolling still works via wheel/
-   trackpad/drag) — a native scrollbar appearing mid-animation, as the
-   zoomed image crosses the viewport edge, reserves gutter space and
-   reflows everything, which is what was making the zoom-in look shaky. */
+   trackpad/drag) purely for a cleaner look. */
 .lightbox.zoom-active {
   overflow: auto;
   scrollbar-width: none;
 }
 .lightbox.zoom-active::-webkit-scrollbar { display: none; }
-/* Wraps the image (and only the image) so the close/arrow buttons,
-   positioned relative to this frame, sit at the photo's own corners and
-   scroll/pan together with it instead of staying pinned to the screen. */
-.lightbox-frame {
-  position: relative;
-}
 .lightbox-img {
   max-width: 88vw;
   max-height: 84vh;
   border-radius: 12px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55);
-  transition: width 0.25s ease, height 0.25s ease;
 }
 /* Tall phone-shot photos (before/after gallery, roughly 9:16) are
    width-limited by max-width long before they hit max-height, so they
@@ -1030,7 +1021,13 @@ span.flatpickr-weekday {
 }
 .lightbox-close,
 .lightbox-arrow {
-  position: absolute;
+  /* Fixed to the viewport, not absolute relative to .lightbox — .lightbox
+     is itself the scroll container when zoomed, so an absolutely
+     positioned child of it scrolls right along with the photo. Anchoring
+     to the viewport instead keeps these pinned to the screen's edges no
+     matter how far the photo is scrolled/panned. */
+  position: fixed;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
